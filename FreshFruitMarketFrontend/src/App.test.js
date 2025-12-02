@@ -1,8 +1,19 @@
 import { render, screen } from '@testing-library/react';
-import App from './App';
+import React from 'react';
+import { HashRouter } from 'react-router-dom';
+import { ThemeProvider } from './contexts/ThemeContext';
+import { CartProvider } from './contexts/CartContext';
+import Header from './components/Header';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+test('renders header title Fresh Fruit Market', () => {
+  render(
+    <ThemeProvider>
+      <CartProvider>
+        <HashRouter>
+          <Header />
+        </HashRouter>
+      </CartProvider>
+    </ThemeProvider>
+  );
+  expect(screen.getByText('Fresh Fruit Market')).toBeInTheDocument();
 });
